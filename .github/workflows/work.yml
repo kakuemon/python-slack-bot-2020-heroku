@@ -1,29 +1,20 @@
 # This is a basic workflow to help you get started with Actions
+name: Deploy Slackbot
 
-name: Slack-bot-workflow
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-          # herokuのデプロイを行うAction
-    - uses: akhileshns/heroku-deploy@v3.0.4
-      with: # GitHubのSettings>Secretsに以下の変数を追加する
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: ${{secrets.HEROKU_APP_NAME}} 
-        heroku_email: ${{secrets.HEROKU_EMAIL}} 
+      # リポジトリをActionsの環境へclone, checkoutを行う
+      - uses: actions/checkout@v2
+      # herokuのデプロイを行うAction
+      - uses: akhileshns/heroku-deploy@v3.0.4
+        with: # GitHubのSettings>Secretsに以下の変数を追加する
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} 
+          heroku_email: ${{secrets.HEROKU_EMAIL}} 
