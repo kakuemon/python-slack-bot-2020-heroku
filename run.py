@@ -28,9 +28,10 @@ def handle_message_greeting(event_data):
     print("debug:handled function: {}".format(sys._getframe().f_code.co_name))
     print("debug:eventdata:{}".format(event_data))
     message = event_data["event"]
-    channel = message["channel"]
-    res_message = message.get("text")
-    slack_client.chat_postMessage(channel=channel, text=res_message)
+    if message.get("subtype") is None and message.get("bot_id") is None:
+        channel = message["channel"]
+        res_message = message.get("text")
+        slack_client.chat_postMessage(channel=channel, text=res_message)
 
     # message = event_data["event"]
 
