@@ -51,7 +51,7 @@ def handle_message_greeting_jp(event_data):
 
     message_pattern = "^こんにちは.*"
 
-    # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要がある
+    # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要があ
     if message.get("subtype") is None and message.get("bot_id") is None:
         matchobj = re.match(message_pattern, message.get("text"))
         if matchobj:
