@@ -30,7 +30,7 @@ def handle_message_greeting(event_data):
     message = event_data["event"]
     if message.get("subtype") is None and message.get("bot_id") is None:
         channel = message["channel"]
-        res_message = message.get("text") + ":octocat:"
+        res_message = message.get("text") + ":dolphin:"
         slack_client.chat_postMessage(channel=channel, text=res_message)
 
     # message = event_data["event"]
