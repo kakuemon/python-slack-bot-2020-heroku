@@ -28,19 +28,24 @@ def handle_message_greeting(event_data):
     print("debug:handled function: {}".format(sys._getframe().f_code.co_name))
     print("debug:eventdata:{}".format(event_data))
     message = event_data["event"]
+    channel = message["channel"]
+    res_message = message.get("text")
+    slack_client.chat_postMessage(channel=channel, text=res_message)
 
-    message_pattern = "^hi.*"
+    # message = event_data["event"]
 
-    # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要がある
-    if message.get("subtype") is None and message.get("bot_id") is None:
-        # メッセージを適当にTrueで当たるものを探して
-        matchobj = re.match(message_pattern, message.get("text"))
-        if matchobj:
-            print("hi receive")
-            # 何かを返す
-            channel = message["channel"]
-            res_message = "Hi!!! :robot_face:I'm pysurugabot! :mount_fuji: :shrimp::fish:"
-            slack_client.chat_postMessage(channel=channel, text=res_message)
+    # message_pattern = "^hi.*"
+
+    # # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要がある
+    # if message.get("subtype") is None and message.get("bot_id") is None:
+    #     # メッセージを適当にTrueで当たるものを探して
+    #     matchobj = re.match(message_pattern, message.get("text"))
+    #     if matchobj:
+    #         print("hi receive")
+    #         # 何かを返す
+    #         channel = message["channel"]
+    #         res_message = "Hi!!! :robot_face::mount_fuji: :shrimp::fish:"
+    #         slack_client.chat_postMessage(channel=channel, text=res_message)
 
 
 @slack_events_adapter.on("message")
@@ -59,6 +64,7 @@ def handle_message_greeting_jp(event_data):
             channel = message["channel"]
             res_message = "こんにちは！！:robot_face::mount_fuji::shrimp::fish:"
             slack_client.chat_postMessage(channel=channel, text=res_message)
+
 
 
 # エラー時のイベントのハンドリング
