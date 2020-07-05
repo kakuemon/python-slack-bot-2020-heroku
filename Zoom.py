@@ -29,7 +29,7 @@ class Zoom_API:
         """ Register RichMenu
         :param zoom_userId: userID
         """
-        querystring = {"page_number":"1","page_size":"30","type":"live"}
+        querystring = {"page_number":"1","page_size":"30","type":"2"}
         res = requests.request("GET", self.url, headers=self.headers, params=querystring)
         return res
 
