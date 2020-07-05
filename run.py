@@ -42,6 +42,8 @@ def Zoom_Create_Room():
 
 
 # Example responder to greetings
+# おうむ返し
+"""
 @slack_events_adapter.on("message")
 def handle_message_greeting(event_data):
     print("debug:handled function: {}".format(sys._getframe().f_code.co_name))
@@ -51,6 +53,7 @@ def handle_message_greeting(event_data):
         channel = message["channel"]
         res_message = message.get("text") + ":dolphin:"
         slack_client.chat_postMessage(channel=channel, text=res_message)
+"""
 
     # message = event_data["event"]
 
