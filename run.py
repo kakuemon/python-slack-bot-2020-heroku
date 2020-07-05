@@ -91,6 +91,7 @@ def handle_message_greeting_jp(event_data):
     if message.get("subtype") is None and message.get("bot_id") is None:
         matchobj = re.match(message_pattern, message.get("text"))
         if matchobj:
+            channel = message["channel"]
             test=ZM.create()
             slack_client.chat_postMessage(channel=channel, text=test.text)
 
