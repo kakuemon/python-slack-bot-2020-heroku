@@ -95,6 +95,22 @@ def handle_message_greeting_jp(event_data):
             test=ZM.create()
             slack_client.chat_postMessage(channel=channel, text=test.text)
 
+@slack_events_adapter.on("message")
+def handle_message_greeting_jp(event_data):
+    print("debug:handled function: {}".format(sys._getframe().f_code.co_name))
+    print("debug:eventdata:{}".format(event_data))
+    message = event_data["event"]
+
+    message_pattern = "^list.*"
+
+    # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要があ
+    if message.get("subtype") is None and message.get("bot_id") is None:
+        matchobj = re.match(message_pattern, message.get("text"))
+        if matchobj:
+            channel = message["channel"]
+            test=ZM.roomList()
+            slack_client.chat_postMessage(channel=channel, text=test.text)
+
 
 # エラー時のイベントのハンドリング
 @slack_events_adapter.on("error")

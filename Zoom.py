@@ -24,5 +24,13 @@ class Zoom_API:
         """
         res = requests.request("POST", self.url, data=self.payload, headers=self.headers)
         return res
+    
+    def roomList(self):
+        """ Register RichMenu
+        :param zoom_userId: userID
+        """
+        querystring = {"page_number":"1","page_size":"30","type":"live"}
+        res = requests.request("GET", self.url, headers=self.headers, params=querystring)
+        return res
 
     
