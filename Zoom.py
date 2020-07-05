@@ -6,25 +6,23 @@ import requests
 
 class Zoom_API:
     """ Datamodel of Zoom """
-    def __init__(self,zoom_token,verify=True):
+    def __init__(self,userId,zoom_token,topic):
         """
         :topic : str
         """
-        self.headers = {"Authorization": "Bearer {%s}" % zoom_token}
-        self.verify=verify
+        self.headers = {
+            "content-type": "application/json",
+            "authorization": "Bearer %s" %  zoom_token
+            }      
         self.info = []
+        self.url = "https://api.zoom.us/v2/users/%s/meetings" % userId
+        self.payload = "{\"topic\":\"{%s}\"}" % topic
 
-    def add_info(self, topic):
-        """ Add an area with action
-        :param topic: topic zoom
-        """
-        bounds = {"topic": topic}
-        self.info.append(bounds)
-        return self.info
-
-    def create(self,info, zoom_userId):
+    def create(self):
         """ Register RichMenu
         :param zoom_userId: userID
         """
-        url = "https://api.zoom.us/v2/users/%s/meetings" % zoom_userId
-        res = requests.post(url, headers=dict(self.headers, **{"content-type": "application/json"}), data=info.to_json(), verify=self.verify).json()
+        res = requests.request("POST", self.url, data=self.payload, headers=self.headers)
+        return res
+
+    

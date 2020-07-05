@@ -10,7 +10,6 @@ from slackeventsapi import SlackEventAdapter
 
 """ Usage of Zoom Manager """
 from Zoom import ZoomRoom, ZoomManager
-
 import requests
 
 # Flaskを作ってgunicornで動くようにする
