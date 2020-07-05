@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 
 test.py
-Zoom.py
 
 # C extensions
 *.so

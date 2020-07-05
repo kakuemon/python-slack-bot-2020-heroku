@@ -3,14 +3,15 @@ import os
 import re
 import sys
 import json
+import requests
 
 from flask import Flask
 from slack import WebClient
 from slackeventsapi import SlackEventAdapter
 
-""" Usage of Zoom Manager """
-from Zoom import ZoomRoom, ZoomManager
-import requests
+""" Usage of Zoom API """
+from Zoom import Zoom_API
+
 
 # Flaskを作ってgunicornで動くようにする
 app = Flask(__name__)
@@ -21,23 +22,14 @@ slack_events_adapter = SlackEventAdapter(slack_signing_secret, "/slack/events", 
 
 # Create a WebClient for your bot to use for Web API requests
 slack_bot_token = os.environ["SLACK_BOT_TOKEN"]
-slack_client = WebClient(slack_bot_token)
+slack_client    = WebClient(slack_bot_token)
 
-ZOOM_USER_ID = os.environ["ZOOM_USER_ID"]
-ZOOM_TOKEN = os.environ["ZOOM_TOKEN"]
+# Zoom setting
+ZOOM_USER_ID    = os.environ["ZOOM_USER_ID"]
+ZOOM_TOKEN      = os.environ["ZOOM_TOKEN"]
+ZOOM_TOPIC      = "20200705TEST"
 
-ZOOM_TOPIC = "20200705Test"
-
-def Zoom_Create_Room():
-    url = "https://api.zoom.us/v2/users/%s/meetings" % ZOOM_USER_ID
-    payload = "{\"topic\":\"%s\"}" % ZOOM_TOPIC
-    headers = {
-        "content-type": "application/json",
-        "authorization": "Bearer %s" % ZOOM_TOKEN 
-        }
-    response = requests.request("POST", url, data=payload, headers=headers)
-    print(response.text)
-    return response.text
+ZM = Zoom_API(ZOOM_USER_ID,ZOOM_TOKEN,ZOOM_TOPIC)
 
 
 # Example responder to greetings
@@ -99,9 +91,8 @@ def handle_message_greeting_jp(event_data):
     if message.get("subtype") is None and message.get("bot_id") is None:
         matchobj = re.match(message_pattern, message.get("text"))
         if matchobj:
-            room = Zoom_Create_Room()
-            slack_client.chat_postMessage(channel=channel, text=room)
-
+            test=ZM.create()
+            slack_client.chat_postMessage(channel=channel, text=test.text)
 
 
 # エラー時のイベントのハンドリング
