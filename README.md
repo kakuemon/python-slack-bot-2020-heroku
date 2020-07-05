@@ -1,5 +1,4 @@
 # python-slack-bot-2020
-unko1
 slack bot
 second challeng
 
