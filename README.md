@@ -75,9 +75,10 @@ GitHubのフォーク方法はヘルプを確認します。
 [リポジトリをフォークする - GitHub ヘルプ](https://help.github.com/ja/github/getting-started-with-github/fork-a-repo)
 
 フォーク後はローカル環境にcloneします。コマンドでの操作はこちらです。
+github登録名は適宜書き換えてください。
 
 ```cmd
-git clone 
+git clone https://github.com/{github登録名}/python-slack-bot-2020.git
 ```
 
 エディター、IDEからのgit cloneはそれぞれのアプリの利用方法を参照してください。
@@ -89,36 +90,28 @@ Pythonはシステムにインストールされた実行環境以外の仮想�
 仮想環境は以下のコマンドで作成します
 
 ```cmd
-cd py-suruga-13-slackbot-handson
 python -m venv .venv
 ```
 
-仮想環境を利用するときには、以下のコマンドを実行します
+仮想環境を利用するときには、以下のコマンドを実行します。
+windowsの場合はこちら
 
 ```cmd
-.\.venv\Scripts\activate.bat
+.\.venv\Script\activate.bat
+```
+macの場合はこちら
+
+```cmd
+.\.venv\bin\activate
 rem 仮想環境上に必要なパッケージをインストールします
 (.venv) > pip install -r requirements.txt
 ```
-
-Pipenvでの環境作成もできます。このハンズオンでは利用しませんが、普段利用されている方はPipfileも同梱しているのでご利用ください。
 
 仮想環境を終了する場合は以下のコマンドを実行します。
 
 ```cmd
 (.venv)deactivate
 ```
-
-### Slackアプリ, Herokuアプリで利用する名前を生成する
-
-今回のハンズオンでは、SlackアプリとHerokuアプリで利用する名前を同一にします。その名前の生成は、リポジトリ内にある `gen_appname.py` を実行して生成します。
-
-```cmd
->python gen_appname.py
-Generate Slack/Heroku App name: 'pysurugabot-[ランダムな数字6桁]'
-```
-
-生成したアプリ名を控えてください。（`appname.txt`というファイルも生成されるようにしています）
 
 ### Slackアプリの作成と設定
 
