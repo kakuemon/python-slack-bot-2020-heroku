@@ -35,10 +35,6 @@ Pythonの実行環境は3.7以降を対象にしています。
 - Heroku Cli
   - [The Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
-## システムの全体図
-
-全体図が乗ります（イメージ全体図を作成中）
-
 ## ハンズオン手順
 
 ### あらかじめ準備したほうが良いもの
@@ -100,10 +96,11 @@ windowsの場合はこちら
 .\.venv\Script\activate.bat
 ```
 macの場合はこちら
-
 ```cmd
 .\.venv\bin\activate
-rem 仮想環境上に必要なパッケージをインストールします
+```
+仮想環境上に必要なパッケージをインストールします
+```cmd
 (.venv) > pip install -r requirements.txt
 ```
 
@@ -112,40 +109,28 @@ rem 仮想環境上に必要なパッケージをインストールします
 ```cmd
 (.venv)deactivate
 ```
-
 ### Slackアプリの作成と設定
 
 まず初めにBotとなるSlackアプリをSlack上で作成します。
 
 「Create a Slack App」からApp Nameにアプリ名を入力します。（このアプリ名はHerokuのアプリ名でも利用します。
 
-![slackapp1.jpg](./doc-img/slackapp1.jpg)
-
 Slack WorkSpaceはハンズオン用に新たに取得したワークスペースを利用してください。
 
 アプリが作成できたら、「OAuth & Permissions」の「Scopes」>「Bot Token Scopes」にスコープの設定を行います。
-
-![slackapp2.jpg](./doc-img/slackapp2.jpg)
 
 「Bot Token Scope」はBotとなるSlackアプリがSlackワークスペースに利用できる権限の範囲（スコープ）です。
 
 この時点では`chat:write`のみで、botがSlackへメッセージを送るためのスコープのみを設定していますが、後ほどの設定で、いくつか追加されます。
 
-![slackapp3.jpg](./doc-img/slackapp3.jpg)
-
 追加したら、ページの上にある「Install App to Workspace」をクリックし、SlackアプリをSlackワークスペースへ追加します。
 
-![slackapp4.jpg](./doc-img/slackapp4.jpg)
-
-![slackapp5.jpg](./doc-img/slackapp5.jpg)
 
 追加が終わると、「Bot User OAuth Access Token」が表示されます。このトークンをまず控えてください。
 
-![slackapp6.jpg](./doc-img/slackapp6.jpg)
 
 次に、右上の「Basic Information」へ戻り、「App Credentials」の中にある「Signing Secret」を控えます。
 
-![slackapp7.jpg](./doc-img/slackapp7.jpg)
 
 ### Herokuのアプリを作成する
 
@@ -153,7 +138,6 @@ Herokuのアプリを作成して必要な設定を行います。
 
 まずHerokuのdashboardへアクセスして「New」>「Create New app」を選択します。
 
-![heroku1.jpg](./doc-img/heroku1.jpg)
 
 App nameへSlackアプリのアプリ名を入れます。このアプリ名はHerokuアプリの外部アドレスに利用されるので、Heroku内でアプリ名が被る場合に利用できないと出ます。
 
@@ -161,11 +145,7 @@ App nameへSlackアプリのアプリ名を入れます。このアプリ名はH
 
 そのまま「Create App」を押してHerokuのアプリを作成します。
 
-![heroku2.jpg](./doc-img/heroku2.jpg)
-
 作成されると、Herokuアプリ名のメニューに入ります。
-
-![heroku3.jpg](./doc-img/heroku3.jpg)
 
 ### Herokuの環境変数にSlackbotで利用するシークレットを登録
 
@@ -178,7 +158,6 @@ Herokuのアプリメニューにある「Settings」の「Config Vars」へ以�
 |SLACK_BOT_TOKEN|Slackアプリ設定で控えた「Bot User OAuth Access Token」|
 |SLACK_SIGNING_SECRET|Slackアプリ設定で控えた「Signing Secret」|
 
-![heroku4.jpg](./doc-img/heroku4.jpg)
 
 ### Herokuの認証情報を取得する
 
@@ -255,15 +234,7 @@ git push origin master
 
 pushが終わるとGitHub ActionsとHeroku側でそれぞれデプロイ作業が始まります。
 
-![github_actions3.jpg](./doc-img/github_actions3.jpg)
-![github_actions4.jpg](./doc-img/github_actions4.jpg)
-
 終了したときのGitHubとHerokuの結果はこのように表示されます。
-
-![github_actions5.jpg](./doc-img/github_actions5.jpg)
-![github_actions6.jpg](./doc-img/github_actions6.jpg)
-
-![heroku5.jpg](./doc-img/heroku5.jpg)
 
 ### Slackbotが利用できるイベントを登録する
 
@@ -280,8 +251,6 @@ Slack Event APIを使い、Slackワークスペース上に起きたイベント
 
 次に「Request URL」にエンドポイントURLを設定します。Herokuのアプリ上でbotアプリが待機しているアドレスを入力します。
 
-![slackapp8.jpg](./doc-img/slackapp8.jpg)
-
 > https://[Herokuのアプリ名].herokuapp.com/slack/events
 
 2つ目の、イベントの種類を登録します。
@@ -292,26 +261,20 @@ Slackアプリのスコープを扱ったときに、イベントによるスコ
 
 「Event Subscriptions」の「Subscribe to bot events」内に`message.channels`イベントを登録します。
 
-![slackapp9.jpg](./doc-img/slackapp9.jpg)
 
 登録後はSlackワークスペースへアプリの再インストールを指示されるので行います。
 
-![slackapp10.jpg](./doc-img/slackapp10.jpg)
 
 再インストール時の認証画面を見ると、権限が追加されていることがわかります。先ほどはチャンネルにメッセージを送信するだけでしたが、それに加えてチャンネル内のメッセージを見ることができます。
 
-![slackapp11.jpg](./doc-img/slackapp11.jpg)
-![slackapp12.jpg](./doc-img/slackapp12.jpg)
 
 デプロイとSlackアプリの権限の設定が終わると、Slackbotが利用できます。最後にSlackワークスペース上でbotを呼び出してみます。
 
 最初に、チャンネルにbotユーザーを追加します。
 
-![slackbot1.jpg](./doc-img/slackbot1.jpg)
 
 次に、botが反応するワードをポストします。ポストして数秒で返答されるようになっています。
 
-![slackbot3.jpg](./doc-img/slackbot3.jpg)
 
 #### 実装されているbotの種類
 
@@ -334,8 +297,6 @@ Slackアプリのスコープを扱ったときに、イベントによるスコ
 - [heroku/python-getting-started: Getting Started with Python on Heroku.](https://github.com/heroku/python-getting-started)
 - [【Python＋heroku】Python入れてない状態からherokuで何か表示するまで（前編） - Qiita](https://qiita.com/it_ks/items/afd1bdb792d41d0e1145#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4)
 - [API Events | Slack](https://api.slack.com/events)
-- [Deploy to Heroku · Actions · GitHub Marketplace](https://github.com/marketplace/actions/deploy-to-heroku)
-- [お天気Webサービス仕様 - Weather Hacks - livedoor 天気情報](http://weather.livedoor.com/weather_hacks/webservice)
 
 ## おまけ
 
@@ -346,21 +307,10 @@ GitHub Actionsを使ってのデプロイではなく、ローカル環境から
 `heroku login`を行った後に、herokuへのデプロイ用のgitリポジトリの登録、pushを行います。
 
 ```cmd
-rem クローンしたリポジトリ内で操作します
-rem herokuのアプリ名:今回はpysurugabot-[ランダム数字6桁]
 
 heroku git:remote -a [herokuのアプリ名]
 git push heroku master
 ```
-
-
-
-
-
-
-
-
-
 
 
 こちらを参考にさせていただきました！
