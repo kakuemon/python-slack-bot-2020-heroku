@@ -35,8 +35,6 @@ Pythonの実行環境は3.7以降を対象にしています。
 - Heroku Cli
   - [The Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
-## ハンズオン手順
-
 ### あらかじめ準備したほうが良いもの
 
 利用する各サービスの登録、 ログインをします
@@ -62,9 +60,9 @@ Slackbotを作る際には、開発用のSlackワークスペースを各自で�
 cd ~\Documents
 ```
 
-### ハンズオンのリポジトリをフォークしてClone
+### リポジトリをフォークしてClone
 
-このハンズオンのGitHubリポジトリを、参加者のGitHubのアカウントへフォークします。そのフォークしたリポジトリをローカル環境にCloneします。
+GitHubリポジトリを、参加者のGitHubのアカウントへフォークします。そのフォークしたリポジトリをローカル環境にCloneします。
 
 GitHubのフォーク方法はヘルプを確認します。
 
@@ -77,7 +75,6 @@ github登録名は適宜書き換えてください。
 git clone https://github.com/{github登録名}/python-slack-bot-2020.git
 ```
 
-エディター、IDEからのgit cloneはそれぞれのアプリの利用方法を参照してください。
 
 ### ローカル開発環境の用意
 
@@ -141,7 +138,6 @@ Herokuのアプリを作成して必要な設定を行います。
 
 App nameへSlackアプリのアプリ名を入れます。このアプリ名はHerokuアプリの外部アドレスに利用されるので、Heroku内でアプリ名が被る場合に利用できないと出ます。
 
-（今回のハンズオンではあらかじめ被らないようなアプリ名を生成してされているはずです）
 
 そのまま「Create App」を押してHerokuのアプリを作成します。
 
@@ -168,13 +164,10 @@ Heroku Cli（herokuコマンド）で連携時に必要な認証情報を取得�
 ```cmd
 heroku login
 
-rem ブラウザでログインするときにエンターを押してください
-
 heroku: Press any key to open up the browser to login or q to exit:
 Opening browser to https://cli-auth.heroku.com/auth/cli/browser/******[専用のトークン文字列が出ます]
 Logging in... done
-Logged in as hrs.sano645@gmail.com
-
+Logged in as ***@**.com
 ```
 
 ログイン後、HerokuのAPI Keyを表示して控えてください。
@@ -188,6 +181,12 @@ heroku auth:token
 ```
 
 注意:このAPI Keyは外部に漏らさないように注意してください。Herokuへの全権限を持った認証キーとなります。
+
+### Zoomの登録とAPIの利用
+
+[ZoomAPI](https://marketplace.zoom.us/docs/api-reference/zoom-api)に登録を行う。
+
+
 
 ### GitHub ActionsでHerokuへデプロイ
 
@@ -205,8 +204,6 @@ GitHubのリポジトリでは基本的に利用できます。定義ファイ�
 
 フォークしたハンズオンのプロジェクトページから「Settings」ページへ進み、「Secrets」のページへ進みます。
 
-![github_actions1.jpg](./doc-img/github_actions1.jpg)
-
 「New secret」ボタンから変数を追加します。
 
 |変数名|値|
@@ -214,21 +211,18 @@ GitHubのリポジトリでは基本的に利用できます。定義ファイ�
 |HEROKU_API_KEY|[`heroku auth:token` で取得したトークン]|
 |HEROKU_APP_NAME|[Herokuのアプリ名]|
 |HEROKU_EMAIL|[Herokuのログインで利用するメールアドレス]|
+|ZOOM_TOKEN|[ZoomのToken]|
+|ZOOM_USER_ID|[ZoomのuserId]|
 
-![github_actions2.jpg](./doc-img/github_actions2.jpg)
 
 Actionsを動作させます。今回のワークフローでは、GitHubへ変更をpushしたタイミングで自動的にワークフローが動作します。なので何かしらのファイルを追加してcommitします。
 
-ローカル開発環境でファイルを追加します。
+ローカル開発環境にてREADMEを編集する。
 
 ```cmd
-rem 新しいファイルを追加する。適当な名前のテキストファイルでも、REDAME.mdに変更を入れるで問題ないです。
-
-rem add, commitする
 git add .
 git commit -m "add new file"
 
-rem pushする
 git push origin master
 ```
 
@@ -276,19 +270,11 @@ Slackアプリのスコープを扱ったときに、イベントによるスコ
 次に、botが反応するワードをポストします。ポストして数秒で返答されるようになっています。
 
 
-#### 実装されているbotの種類
 
-|botのコマンド|返答|
-|---|---|
-|hi|英語風の挨拶を返します|
-|こんにちは|日本語の挨拶を返します|
-|shizuokatenki [西部/中部/東部/伊豆]| 静岡の4地域の天気を教えてくれます|
+## Slackbot概要
 
-## ハンズオンのSlackbot概要
+システム全体の様子はこのような形になります。
 
-今回のハンズオンのシステム全体の様子はこのような形になります。
-
-![スライドより:システムの全体図](./doc-img/slide-system-image.png)
 
 ## 参考資料
 
