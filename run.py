@@ -126,7 +126,7 @@ def handle_message_greeting_jp(event_data):
                 # output_list.append(test_dict["meetings"][count]["topic"])
                 # output_list.append(test_dict["meetings"][count]["join_url"])
                 # output_list.append("\n")
-            mojiretu = ''.join(hoge_list)
+            mojiretu = ''.join(zoom_list)
             print(mojiretu)
             slack_client.chat_postMessage(channel=channel, text=mojiretu)
 
