@@ -184,7 +184,7 @@ App nameへSlackアプリのアプリ名を入れます。このアプリ名はH
 
 そのまま「Create App」を押してHerokuのアプリを作成します。
 
-<img src="https://user-images.githubusercontent.com/55194591/87147445-a2a24980-c2e7-11ea-8406-a5f2c09d84a6.png" width=50%>
+<img src="https://user-images.githubusercontent.com/55194591/87147449-a33ae000-c2e7-11ea-9cfb-fc726634aae9.png" width=50%>
 
 作成されると、Herokuアプリ名のメニューに入ります。
 
@@ -203,7 +203,10 @@ Herokuのアプリメニューにある「Settings」の「Config Vars」へ以�
 
 
 
+<img src="https://user-images.githubusercontent.com/55194591/87147458-a46c0d00-c2e7-11ea-8c11-afef1a0d9082.png" width=70%>
+
 <img src="https://user-images.githubusercontent.com/55194591/87147471-a766fd80-c2e7-11ea-90f3-632b5e52a767.png" width=70%>
+
 
 
 ### Herokuの認証情報を取得する
