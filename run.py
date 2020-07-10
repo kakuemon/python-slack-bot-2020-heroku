@@ -109,7 +109,16 @@ def handle_message_greeting_jp(event_data):
         if matchobj:
             channel = message["channel"]
             test=ZM.roomList()
-            slack_client.chat_postMessage(channel=channel, text=test.text)
+            #json format
+            test_json=test.json()
+            data = json.dumps(test_json, indent=3)
+            test_dict=json.loads(data)
+            test_length=len(test_dict["meetings"])
+            for count in range(test_length):
+                print(test_dict["meetings"][count]["topic"])
+                print(test_dict["meetings"][count]["join_url"])
+                slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["topic"])
+                slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["join_url"])
 
 
 # エラー時のイベントのハンドリング
