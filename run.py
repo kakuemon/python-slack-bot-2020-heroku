@@ -85,7 +85,7 @@ def handle_message_greeting_jp(event_data):
     print("debug:eventdata:{}".format(event_data))
     message = event_data["event"]
 
-    message_pattern = "^zoom.*"
+    message_pattern = "^create.*"
 
     # subtypeがない場合=普通のメッセージ, 自分自身の内容を取得してもスルーするようにしておく必要があ
     if message.get("subtype") is None and message.get("bot_id") is None:
