@@ -149,12 +149,20 @@ App nameへSlackアプリのアプリ名を入れます。このアプリ名はH
 
 Slackbotが実際に動作する環境がHerokuになります。そのため、Herokuの実行環境にSlackbotがSlackと通信する際に利用するapiのトークンやシークレットを覚えさせる必要があります。
 
-Herokuのアプリメニューにある「Settings」の「Config Vars」へ以下の2つを登録します。
+### Zoomの登録とAPIの利用
+
+[ZoomAPI](https://marketplace.zoom.us/docs/api-reference/zoom-api)に登録を行う。
+
+JWTにてTOKENを発行する。
+
+Herokuのアプリメニューにある「Settings」の「Config Vars」へ以下の5つを登録します。
 
 |KEY|VALUE|
 |---|---|
 |SLACK_BOT_TOKEN|Slackアプリ設定で控えた「Bot User OAuth Access Token」|
 |SLACK_SIGNING_SECRET|Slackアプリ設定で控えた「Signing Secret」|
+|ZOOM_TOKEN|[ZoomのToken]|
+|ZOOM_USER_ID|[ZoomのuserId]|
 
 
 ### Herokuの認証情報を取得する
@@ -184,12 +192,6 @@ heroku auth:token
 
 注意:このAPI Keyは外部に漏らさないように注意してください。Herokuへの全権限を持った認証キーとなります。
 
-### Zoomの登録とAPIの利用
-
-[ZoomAPI](https://marketplace.zoom.us/docs/api-reference/zoom-api)に登録を行う。
-
-JWTにてTOKENを発行する。
-
 
 ### GitHub ActionsでHerokuへデプロイ
 
@@ -214,8 +216,6 @@ GitHubのリポジトリでは基本的に利用できます。定義ファイ�
 |HEROKU_API_KEY|[`heroku auth:token` で取得したトークン]|
 |HEROKU_APP_NAME|[Herokuのアプリ名]|
 |HEROKU_EMAIL|[Herokuのログインで利用するメールアドレス]|
-|ZOOM_TOKEN|[ZoomのToken]|
-|ZOOM_USER_ID|[ZoomのuserId]|
 
 
 Actionsを動作させます。今回のワークフローでは、GitHubへ変更をpushしたタイミングで自動的にワークフローが動作します。なので何かしらのファイルを追加してcommitします。
@@ -271,7 +271,6 @@ Slackアプリのスコープを扱ったときに、イベントによるスコ
 
 
 次に、botが反応するワードをポストします。ポストして数秒で返答されるようになっています。
-
 
 
 ## Slackbot概要
