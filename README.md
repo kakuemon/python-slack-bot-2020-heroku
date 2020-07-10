@@ -177,12 +177,7 @@ Herokuのアプリを作成して必要な設定を行います。
 
 まずHerokuのdashboardへアクセスして「New」>「Create New app」を選択します。
 
-<img src="https://user-images.githubusercontent.com/55194591/87147445-a2a24980-c2e7-11ea-8406-a5f2c09d84a6.png" width=50%>
-
 App nameへSlackアプリのアプリ名を入れます。このアプリ名はHerokuアプリの外部アドレスに利用されるので、Heroku内でアプリ名が被る場合に利用できないと出ます。
-
-
-そのまま「Create App」を押してHerokuのアプリを作成します。
 
 <img src="https://user-images.githubusercontent.com/55194591/87147449-a33ae000-c2e7-11ea-9cfb-fc726634aae9.png" width=50%>
 
