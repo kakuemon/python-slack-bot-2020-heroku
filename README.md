@@ -1,6 +1,6 @@
 # python-slack-bot-2020
 pythonにて実装するslack botです。メッセージを送ると反応します。
-ZoomのURLも生成します。
+ZoomAPIを利用してURLを生成します。
 
 ## 概要
 
