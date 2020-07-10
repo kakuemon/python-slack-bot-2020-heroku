@@ -117,6 +117,7 @@ def handle_message_greeting_jp(event_data):
             for count in range(test_length):
                 print(test_dict["meetings"][count]["topic"])
                 print(test_dict["meetings"][count]["join_url"])
+                print(count)
                 slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["topic"])
                 slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["join_url"])
 
