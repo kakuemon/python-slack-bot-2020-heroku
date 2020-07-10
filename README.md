@@ -1,7 +1,7 @@
 # python-slack-bot-2020
-こちらを参考にさせて頂きました。ありがとうございます。
-https://github.com/kakuemon/py-suruga-13-slackbot-handson
-pythonにて実装するslack botです。メッセージを送ると反応します。
+こちらを参考にさせて頂きました。ありがとうございます。 
+https://github.com/kakuemon/py-suruga-13-slackbot-handson 
+pythonにて実装するslack botです。メッセージを送ると反応します。 
 ZoomのURLも生成します。
 
 ## 概要
