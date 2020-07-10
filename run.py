@@ -120,6 +120,9 @@ def handle_message_greeting_jp(event_data):
                 print(count)
                 slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["topic"])
                 slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["join_url"])
+                if count > 20 :
+                    break
+
 
 
 # エラー時のイベントのハンドリング
