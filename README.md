@@ -118,6 +118,7 @@ Slack WorkSpaceはハンズオン用に新たに取得したワークスペー�
 
 <img src="https://user-images.githubusercontent.com/55194591/87147422-99b17800-c2e7-11ea-960c-8ff44e173555.png" width=50%>
 
+
 アプリが作成できたら、「OAuth & Permissions」の「Scopes」>「Bot Token Scopes」にスコープの設定を行います。
 
 「Bot Token Scope」はBotとなるSlackアプリがSlackワークスペースに利用できる権限の範囲（スコープ）です。
