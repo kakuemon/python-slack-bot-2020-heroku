@@ -114,15 +114,31 @@ def handle_message_greeting_jp(event_data):
             data = json.dumps(test_json, indent=3)
             test_dict=json.loads(data)
             test_length=len(test_dict["meetings"])
+
+            zoom_list = []
             for count in range(test_length):
-                print(test_dict["meetings"][count]["topic"])
-                print(test_dict["meetings"][count]["join_url"])
-                print(count)
-                slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["topic"])
-                slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["join_url"])
-                if count > 20 :
-                    print("endl")
-                    break
+                a = test_dict["meetings"][count]["topic"]
+                b = test_dict["meetings"][count]["join_url"]
+                test = a + "\n\r" + b + "\n" + "\n\r"
+                zoom_list.append(test)
+
+                # print(hoge)
+                # output_list.append(test_dict["meetings"][count]["topic"])
+                # output_list.append(test_dict["meetings"][count]["join_url"])
+                # output_list.append("\n")
+            mojiretu = ''.join(hoge_list)
+            print(mojiretu)
+            slack_client.chat_postMessage(channel=channel, text=mojiretu)
+
+            # for count in range(test_length):
+            #     print(test_dict["meetings"][count]["topic"])
+            #     print(test_dict["meetings"][count]["join_url"])
+            #     print(count)
+            #     slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["topic"])
+            #     slack_client.chat_postMessage(channel=channel, text=test_dict["meetings"][count]["join_url"])
+            #     if count > 20 :
+            #         print("endl")
+            #         break
 
 
 
