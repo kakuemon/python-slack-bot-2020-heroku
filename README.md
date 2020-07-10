@@ -1,4 +1,6 @@
 # python-slack-bot-2020
+こちらを参考にさせて頂きました。ありがとうございます。
+https://github.com/kakuemon/py-suruga-13-slackbot-handson
 pythonにて実装するslack botです。メッセージを送ると反応します。
 ZoomのURLも生成します。
 
@@ -62,7 +64,7 @@ cd ~\Documents
 
 ### リポジトリをフォークしてClone
 
-GitHubリポジトリを、参加者のGitHubのアカウントへフォークします。そのフォークしたリポジトリをローカル環境にCloneします。
+GitHubリポジトリを、ご自身のアカウントへフォークします。そのフォークしたリポジトリをローカル環境にCloneします。
 
 GitHubのフォーク方法はヘルプを確認します。
 
@@ -186,6 +188,7 @@ heroku auth:token
 
 [ZoomAPI](https://marketplace.zoom.us/docs/api-reference/zoom-api)に登録を行う。
 
+JWTにてTOKENを発行する。
 
 
 ### GitHub ActionsでHerokuへデプロイ
